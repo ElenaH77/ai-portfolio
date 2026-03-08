@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Projects Portfolio</title>
+    <style>
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f7f4;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        a { color: #2563eb; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ===== Nav ===== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a {
+            color: #555;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #1a1a1a; text-decoration: none; }
+
+        /* ===== Hero ===== */
+        .hero {
+            background: linear-gradient(180deg, #e8edf5 0%, #f8f7f4 100%);
+            padding: 5rem 2rem 4rem;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: #555;
+            max-width: 550px;
+            line-height: 1.7;
+        }
+
+        /* ===== Project Grid ===== */
+        .projects {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* ===== Project Card ===== */
+        .card {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            transition: box-shadow 0.2s;
+        }
+        .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* Status badges */
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-transform: lowercase;
+        }
+        .badge.active      { background: #dbeafe; color: #1e40af; }
+        .badge.experimental { background: #fef3c7; color: #92400e; }
+        .badge.archived     { background: #f3f4f6; color: #6b7280; }
+        .badge.tutorial     { background: #d1fae5; color: #065f46; }
+
+        .card-desc {
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.65;
+        }
+
+        /* Tags */
+        .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid #e5e5e5;
+            background: #fafafa;
+            color: #444;
+            font-weight: 500;
+        }
+
+        /* Card links row */
+        .card-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #f0f0f0;
+        }
+        .card-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: #2563eb;
+        }
+        .card-links a:hover { color: #1d4ed8; }
+
+        /* Link icons (simple SVG inline) */
+        .icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        /* ===== Expandable Detail Section ===== */
+        .card-detail { margin-top: 0.25rem; }
+
+        .detail-toggle {
+            background: none;
+            border: none;
+            color: #2563eb;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.25rem 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .detail-toggle:hover { color: #1d4ed8; }
+        .detail-toggle .arrow {
+            display: inline-block;
+            transition: transform 0.2s;
+            font-size: 0.7rem;
+        }
+        .detail-toggle.open .arrow { transform: rotate(90deg); }
+
+        .detail-content {
+            display: none;
+            margin-top: 0.75rem;
+            padding: 1.25rem;
+            background: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #333;
+        }
+        .detail-content.open { display: block; }
+
+        .detail-content h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.5rem;
+            color: #1a1a1a;
+        }
+        .detail-content h3:first-child { margin-top: 0; }
+
+        .detail-content p { margin-bottom: 0.75rem; }
+
+        .detail-content ul {
+            margin: 0.5rem 0 0.75rem 1.25rem;
+            list-style: disc;
+        }
+        .detail-content li { margin-bottom: 0.3rem; }
+
+        /* Code/prompt blocks inside detail */
+        .prompt-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 0.75rem 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .prompt-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Embedded video */
+        .video-embed {
+            margin: 0.75rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+        }
+        .video-embed iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Images inside detail */
+        .detail-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 0.75rem 0;
+            border: 1px solid #e5e5e5;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #999;
+            font-size: 0.85rem;
+        }
+        footer a { color: #666; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 3rem 1.5rem 2.5rem; }
+            .projects {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            nav { padding: 0.75rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+    <div class="nav-logo">AI Projects</div>
+    <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="https://www.linkedin.com/in/elenahutchison/" target="_blank">LinkedIn</a>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+    <h1>Building with AI</h1>
+    <p>I'm not a developer &mdash; I'm a problem-solver who uses AI tools to build
+    real things. These are my projects, from apps to community tools to
+    everyday automations, with write-ups showing exactly how I built them
+    so you can do it too.</p>
+</div>
+
+<!-- ===== PROJECTS ===== -->
+<div class="projects" id="projects">
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 1: GeoMath Adventure! -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>GeoMath Adventure!</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">An interactive browser game for kids that combines multiplication tables with geography. Built with Claude Code and published to GitHub Pages &mdash; from prompt to playable game in 20 minutes.</p>
+        <div class="tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">Education</span>
+            <span class="tag">GitHub Pages</span>
+            <span class="tag">Game</span>
+        </div>
+
+        <!-- Expandable detail section -->
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Idea</h3>
+                <p>My 9-year-old needed engaging screen time that was actually educational. I wanted to combine something she needed to practice (multiplication tables) with something she was interested in (geography) &mdash; and I wanted to build it fast.</p>
+
+                <h3>What You Need</h3>
+                <p>Claude Pro (to access Claude Code in terminal or the Claude desktop app) and a way to publish a website. I use GitHub Pages because it's free, easy, and Claude can do the publishing directly.</p>
+
+                <h3>The Prompt</h3>
+                <div class="prompt-block">
+                    <div class="prompt-label">Claude Code Prompt</div>
+I want to create a simple age-appropriate game for my 9 year old child to play on their iPad via the browser. Combine geography with multiplication tables. Ask me any clarifying questions before we begin.
+                </div>
+
+                <h3>The Process</h3>
+                <p>Answer any questions Claude asks, allow whatever permissions it needs, and then let it cook. It opens a browser window at the end where you can play the output and request refinements. Once you like it, tell Claude to publish it to a GitHub page &mdash; once you've connected the two, Claude handles the publishing for you, and now it's on a website you can load from any device.</p>
+
+                <p>Total time from prompt to published game: about 20 minutes. She's obsessed.</p>
+
+                <h3>Try It Yourself</h3>
+                <p>The formula works for any kid and any combo of interests + learning goals. KPop Demon Hunters Vocabulary Lesson? Math game where the answer is always 6-7? Taylor Swift Themed Phonics practice? The world is your oyster.</p>
+            </div>
+        </div>
+
+        <div class="card-links">
+            <a href="https://elenah77.github.io/GeoMath/" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Play It
+            </a>
+            <a href="https://github.com/elenah77/GeoMath" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                Source
+            </a>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 2: DRCA Lending Library -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>DRCA Lending Library</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">A neighborhood lending library web app for the Del Ray Citizens Association. Connects neighbors to share tools, gear, and supplies &mdash; reducing waste and building community. Built in one evening with Claude.</p>
+        <div class="tags">
+            <span class="tag">Claude</span>
+            <span class="tag">Google Forms</span>
+            <span class="tag">Apps Script</span>
+            <span class="tag">Community</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Problem</h3>
+                <p>Our neighborhood is full of tools, camping gear, party supplies, and more sitting unused in garages 360+ days a year &mdash; while other neighbors are buying and storing the exact same stuff. I wanted a way to connect members and facilitate sharing to build community and reduce waste.</p>
+
+                <h3>The Solution</h3>
+                <p>I used Claude to build a simple web application that leverages tech the association already pays for. Lenders enter sharable items in a Google Form, and from there they're automatically accessible in a searchable catalog on our website. When a borrowing request is made, a Google Apps Script sends an email connecting the borrower and lender so they can coordinate.</p>
+
+                <h3>The Stack</h3>
+                <p>The beauty of this project is how simple the architecture is. Google Forms for data entry, Google Sheets as the database, Google Apps Script for the email automation, and a lightweight frontend for browsing. No servers to maintain, no databases to manage, and it runs on tools the organization was already paying for.</p>
+
+                <h3>Context</h3>
+                <p>This was my capstone project for Women Defining AI's Advanced course, covering AI workflows, agents, and vibecoding. I've experimented with all three before, but this was the first time I had the support and structure to build something fit for use beyond just me.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>AI tools are democratizing tech creation. You don't need to be a developer to build real solutions for real problems in your community. You need curiosity, persistence, and willingness to experiment and problem-solve. If I can build this in three weeks while learning, you absolutely can too. The barrier to entry has never been lower.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 3: Dinner Decided -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Dinner Decided</h2>
+            <span class="badge archived">archived</span>
+        </div>
+        <p class="card-desc">A meal planning app that generates weekly dinner plans based on your family, preferences, skill level, and schedule &mdash; then turns it into a grocery list organized by department. My first vibecoded project.</p>
+        <div class="tags">
+            <span class="tag">Replit</span>
+            <span class="tag">Meal Planning</span>
+            <span class="tag">Vibecoding</span>
+            <span class="tag">First Build</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>Demo (4 min)</h3>
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/wc2aYtwA5Uc" allowfullscreen loading="lazy"></iframe>
+                </div>
+
+                <h3>The Problem</h3>
+                <p>I get way more excited about applying AI to solve problems at home versus at work. And one of the most AI-solvable problems I have at home is meal planning. What to cook, what to buy, how to match meals to a busy week &mdash; it's a perfect fit for AI.</p>
+
+                <h3>How It Works</h3>
+                <p>After a quick onboarding (who is in your family, meal preferences, cooking skill, appliances), there's a weekly workflow: tell it about your week (which nights you can do a bigger batch cook for lunches, which nights need a 15-minute post-practice meal), modify or replace anything that doesn't sound good, then send the plan straight to a grocery list organized by department.</p>
+
+                <h3>What I Learned</h3>
+                <p>This was built back in fall 2025, which was a lifetime ago in AI coding terms. It was my first vibecoded project and it was WAY harder then than it would be now. I've since rebuilt the exact same functionality as just a Claude project paired with a spreadsheet &mdash; way less overhead. The evolution of the tooling in just a few months is remarkable.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>You could build something that solves your biggest problem at home too. Maybe even go a step further and commercialize it. If I can do this, anyone can. What problem would you solve?</p>
+            </div>
+        </div>
+
+        <div class="card-links">
+            <a href="https://youtu.be/wc2aYtwA5Uc" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Watch Demo
+            </a>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 4: School Form Filler -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>School Form Filler</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">AI finally solved my white whale: the annual stack of summer camp forms. One prompt, previously filled forms as reference, and Claude fills out the new ones &mdash; all locally on your machine, no sensitive data in the cloud.</p>
+        <div class="tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">Cowork</span>
+            <span class="tag">PDF</span>
+            <span class="tag">Parenting</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Problem</h3>
+                <p>Every year, same story: a stack of camp and school forms that need the same information filled in over and over. Medical history, emergency contacts, allergies, insurance &mdash; it's tedious, repetitive, and exactly the kind of thing AI should handle.</p>
+
+                <h3>The Prompt</h3>
+                <div class="prompt-block">
+                    <div class="prompt-label">Claude Code / Cowork Prompt</div>
+In this folder you will find a blank pdf camp form as well as completed forms from previous years and a recent medical exam form. Review the filled out forms and use them to complete the blank form with up to date information. Ask me any questions you cannot answer. You may need to install a pdf filler skill to complete this task.
+                </div>
+
+                <h3>How It Works</h3>
+                <p>Drop the blank form, last year's completed forms, and any updated medical docs into a folder. Point Claude at it. It reads everything, cross-references the info, fills out the new form, and asks you about anything it can't find. Saves the completed PDF right back to the same folder.</p>
+
+                <h3>Why This Matters</h3>
+                <p>Because you're using Claude Code or Cowork, everything happens locally on your machine. No uploading your kid's medical records or social security numbers to the cloud. This is a real concern with AI tools and a real advantage of local-first approaches.</p>
+
+                <h3>Try It Yourself</h3>
+                <p>You're welcome, parents.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 5: Tidekeeper -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Tidekeeper</h2>
+            <span class="badge experimental">experimental</span>
+        </div>
+        <p class="card-desc">A household astrology app that gives daily and weekly readings with practical tips tied to the specific transits your household is experiencing. Built March 8, 2026 for Lovable She Builds.</p>
+        <div class="tags">
+            <span class="tag">Lovable</span>
+            <span class="tag">Astrology</span>
+            <span class="tag">She Builds</span>
+            <span class="tag">Vibecoding</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Idea</h3>
+                <p>Most astrology apps are individual &mdash; they tell you about your day. But households are systems. I wanted something that looks at everyone's charts together and gives practical, household-level guidance. When Mercury retrograde is hitting your partner's communication house while your kid's chart is fired up &mdash; that's useful context for navigating the week.</p>
+
+                <h3>The Tool</h3>
+                <p>Built with Lovable as part of their She Builds event. Lovable is another vibecoding platform &mdash; you describe what you want and it builds it. Different vibe from Claude Code (more visual, more app-focused) but the same core idea: describe the problem, iterate on the output.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>This is a great example of building something that scratches your own itch. No astrology app on the market does household-level readings. When the tools let you build exactly what you want in an afternoon, you stop waiting for someone else to build it.</p>
+            </div>
+        </div>
+
+        <div class="card-links">
+            <a href="https://tidekeeper.lovable.app" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Try It
+            </a>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 6: Video Editing Double Demo -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Video Editing Double Demo: Opus.AI &amp; Descript</h2>
+            <span class="badge tutorial">tutorial</span>
+        </div>
+        <p class="card-desc">A live demo of two AI video editing workflows: using Opus.AI to clip long-form podcasts into branded, short-form LinkedIn content, and Descript to edit video like editing a document. Presented July 2024 at Women Defining AI's Show Not Tell.</p>
+        <div class="tags">
+            <span class="tag">Opus.AI</span>
+            <span class="tag">Descript</span>
+            <span class="tag">Video Editing</span>
+            <span class="tag">AI Workflows</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> What I Showed
+            </button>
+            <div class="detail-content">
+                <!-- Screenshot from the July 2024 Show Not Tell session -->
+                <img src="WDAI Show Not Tell.jpeg" alt="Elena presenting Opus.AI and Descript at Women Defining AI's Show Not Tell, July 2024">
+
+                <h3>Opus.AI Workflow</h3>
+                <p>Take a longer-form video podcast, feed it to Opus, and get back short-form clips that are scored for succinctness and virality potential &mdash; branded and ready to post on LinkedIn. It turns one piece of content into many without the hours of manual scrubbing and cutting.</p>
+
+                <h3>Descript Workflow</h3>
+                <p>Descript lets you edit video the way you'd edit a Google Doc. It transcribes your video, and then you delete words from the transcript and the video cuts itself. Highlight a sentence, hit delete, done. It completely changes who can edit video &mdash; you don't need to learn timeline-based editors anymore.</p>
+
+                <h3>Context</h3>
+                <p>Presented July 2024 at Women Defining AI's monthly Show Not Tell &mdash; a forum where members teach other members with actionable use cases and workflows. The whole point is showing, not just talking about, how you actually use these tools day to day.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- end .projects -->
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>Built with curiosity. I love connecting with fellow builders &mdash; <a href="https://www.linkedin.com/in/elenahutchison/" target="_blank">let's connect on LinkedIn</a>.</p>
+</footer>
+
+<!-- ===== JS ===== -->
+<script>
+function toggleDetail(btn) {
+    const content = btn.nextElementSibling;
+    btn.classList.toggle('open');
+    content.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
