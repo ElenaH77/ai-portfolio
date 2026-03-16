@@ -516,7 +516,7 @@ In this folder you will find a blank pdf camp form as well as completed forms fr
                 <p>Most astrology apps are individual &mdash; they tell you about your day. But households are systems. I wanted something that looks at everyone's charts together and gives practical, household-level guidance. When Mercury retrograde is hitting your partner's communication house while your kid's chart is fired up &mdash; that's useful context for navigating the week.</p>
 
                 <h3>The Tool</h3>
-                <p>Built with Lovable as part of their She Builds hackathon, but then I migrated it to Vercel+Supabase+Claude AI once I had a working prototype (with a lot of help from Claude Code!). Lovable did a beautiful job building the app, but it's expensive to run it there, so I wanted a more cost effective solution. This is the first time I've built an app with a login that others could securely use, and then I managed to migrate it too! All in one day!</p>
+                <p>Built with Lovable as part of their She Builds event. Lovable is another vibecoding platform &mdash; you describe what you want and it builds it. Different vibe from Claude Code (more visual, more app-focused) but the same core idea: describe the problem, iterate on the output.</p>
 
                 <h3>The Bigger Point</h3>
                 <p>This is a great example of building something that scratches your own itch. No astrology app on the market does household-level readings. When the tools let you build exactly what you want in an afternoon, you stop waiting for someone else to build it.</p>
@@ -524,7 +524,7 @@ In this folder you will find a blank pdf camp form as well as completed forms fr
         </div>
 
         <div class="card-links">
-            <a href="https://tidekeeper.vercel.app" target="_blank">
+            <a href="https://tidekeeper.lovable.app" target="_blank">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 Try It
             </a>
@@ -532,7 +532,50 @@ In this folder you will find a blank pdf camp form as well as completed forms fr
     </div>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!-- PROJECT 6: Video Editing Double Demo -->
+    <!-- PROJECT 6: Safer Braddock -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Safer Braddock</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">A civic advocacy website that puts a human face on supporters of the Braddock Road safety improvements. Neighbors submit their stories, which appear on a moderated comment wall. Built with Claude Code using Next.js, Supabase, and Vercel.</p>
+        <div class="tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Civic Tech</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Problem</h3>
+                <p>Opponents of the Braddock Road improvement project claimed that people who want safer streets don't exist. I wanted to prove them wrong &mdash; not with data, but with real human voices from the neighborhood.</p>
+
+                <h3>What It Does</h3>
+                <p>Neighbors visit the site, share why they support making Braddock Road safer, and indicate how they travel (walking, biking, driving, transit), whether they travel with kids or someone with a mobility difference, and whether they'd use the road more if it felt safer. Comments go through a moderation queue before appearing on the public wall. The site also tracks aggregate stats so you can see the community at a glance.</p>
+
+                <h3>The Stack</h3>
+                <p>Next.js with App Router for the frontend, Supabase for the database with row-level security, Resend for email notifications when new comments come in, and Vercel for hosting with auto-deploy from GitHub. I wrote the full spec as a detailed markdown document and handed it to Claude Code, which built the entire site.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>This is a full-stack web application with a database, admin panel, email notifications, and moderation &mdash; the kind of thing that would have cost thousands to commission. It's live, it's being used for real advocacy, and a non-developer built it. If you have a cause in your community, you have the tools to amplify it.</p>
+            </div>
+        </div>
+
+        <div class="card-links">
+            <a href="https://www.saferbraddock.org/" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Site
+            </a>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 7: Video Editing Double Demo -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div class="card">
         <div class="card-header">
