@@ -305,7 +305,94 @@
 <div class="projects" id="projects">
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!-- PROJECT 1: GeoMath Adventure! -->
+    <!-- PROJECT 1: Safer Braddock -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Safer Braddock</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">A civic advocacy website that puts a human face on supporters of the Braddock Road safety improvements. Neighbors submit their stories, which appear on a moderated comment wall. Built with Claude Code using Next.js, Supabase, and Vercel.</p>
+        <div class="tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Civic Tech</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Problem</h3>
+                <p>Opponents of the Braddock Road improvement project claimed that people who want safer streets don't exist. I wanted to prove them wrong &mdash; not with data, but with real human voices from the neighborhood.</p>
+
+                <h3>What It Does</h3>
+                <p>Neighbors visit the site, share why they support making Braddock Road safer, and indicate how they travel (walking, biking, driving, transit), whether they travel with kids or someone with a mobility difference, and whether they'd use the road more if it felt safer. Comments go through a moderation queue before appearing on the public wall. The site also tracks aggregate stats so you can see the community at a glance.</p>
+
+                <h3>The Stack</h3>
+                <p>Next.js with App Router for the frontend, Supabase for the database with row-level security, Resend for email notifications when new comments come in, and Vercel for hosting with auto-deploy from GitHub. I wrote the full spec as a detailed markdown document and handed it to Claude Code, which built the entire site.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>This is a full-stack web application with a database, admin panel, email notifications, and moderation &mdash; the kind of thing that would have cost thousands to commission. It's live, it's being used for real advocacy, and a non-developer built it. If you have a cause in your community, you have the tools to amplify it.</p>
+            </div>
+        </div>
+
+        <div class="card-links">
+            <a href="https://www.saferbraddock.org/" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Site
+            </a>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 2: DRCA City Hall Watch -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>DRCA City Hall Watch</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">A monthly automated scan of Alexandria city government activity &mdash; council agendas, planning commission dockets, traffic board actions, development projects, social media, and local news &mdash; filtered for items affecting Del Ray. Produces a board reference and a publication-ready newsletter article, then emails results to the DRCA vice president.</p>
+        <div class="tags">
+            <span class="tag">Claude</span>
+            <span class="tag">Cowork</span>
+            <span class="tag">Scheduled Tasks</span>
+            <span class="tag">Web Search</span>
+            <span class="tag">Civic Tech</span>
+            <span class="tag">Community</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Problem</h3>
+                <p>The Del Ray Citizens Association publishes a monthly newsletter, and one of its most valuable sections covers what's happening at City Hall that affects the neighborhood. But compiling it means checking a dozen city websites, reading agendas and dockets, tracking active development projects, monitoring local news, and cross-referencing it all against what the DRCA has already discussed at past meetings. It takes hours, and it's easy to miss things.</p>
+
+                <h3>The Solution</h3>
+                <p>I used Claude's Cowork mode to build a monthly government monitoring workflow. On the first Monday of each month, a scheduled task automatically searches city council, planning commission, traffic &amp; parking board, and board of zoning appeals agendas. It checks administrative special use permit applications near Del Ray, monitors active projects (Simpson Park renovation, Del Ray Gateway, the $50M Commonwealth/Glebe flood mitigation project, King Street rail bridge replacement, and more), searches city social media accounts for announcements, scans local news from Alexandria Brief and ALXnow, and cross-references everything against past DRCA meeting minutes and the association's formal positions on active issues.</p>
+
+                <p>It produces two outputs: a detailed scan report for the executive board with every item, link, and deadline, and a polished newsletter article written in a factual, just-the-facts tone ready for publication. Then it emails both to the VP.</p>
+
+                <h3>The Editorial Layer</h3>
+                <p>The hardest part wasn't the technical build &mdash; it was getting the tone right. A civic association newsletter has to be scrupulously factual. Early drafts included framing like "this is the most consequential election for Del Ray" &mdash; language that sounds neutral but has been used elsewhere in the city as coded political messaging. The final prompt includes explicit editorial guidelines: stick to names, dates, and links. State DRCA positions where they exist, but don't editorialize. Let readers draw their own conclusions.</p>
+
+                <h3>The Stack</h3>
+                <p>Claude in Cowork mode with web search for the research, scheduled tasks for the monthly automation, and Gmail for delivery. The scan report and newsletter are saved as markdown files in a shared folder. No code to maintain &mdash; the entire workflow is a carefully written prompt.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>This is a real civic infrastructure tool that a non-developer volunteer can maintain. The prompt encodes institutional knowledge &mdash; which projects to track, what the DRCA's positions are, where to find meeting minutes &mdash; so that continuity doesn't depend on one person's memory and an all-volunteer org doesn't have to spend hours hunting things down month after month.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT 3: GeoMath Adventure! -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div class="card">
         <div class="card-header">
@@ -532,50 +619,7 @@ In this folder you will find a blank pdf camp form as well as completed forms fr
     </div>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!-- PROJECT 6: Safer Braddock -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <div class="card">
-        <div class="card-header">
-            <h2>Safer Braddock</h2>
-            <span class="badge active">active</span>
-        </div>
-        <p class="card-desc">A civic advocacy website that puts a human face on supporters of the Braddock Road safety improvements. Neighbors submit their stories, which appear on a moderated comment wall. Built with Claude Code using Next.js, Supabase, and Vercel.</p>
-        <div class="tags">
-            <span class="tag">Claude Code</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">Supabase</span>
-            <span class="tag">Civic Tech</span>
-        </div>
-
-        <div class="card-detail">
-            <button class="detail-toggle" onclick="toggleDetail(this)">
-                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
-            </button>
-            <div class="detail-content">
-                <h3>The Problem</h3>
-                <p>Opponents of the Braddock Road improvement project claimed that people who want safer streets don't exist. I wanted to prove them wrong &mdash; not with data, but with real human voices from the neighborhood.</p>
-
-                <h3>What It Does</h3>
-                <p>Neighbors visit the site, share why they support making Braddock Road safer, and indicate how they travel (walking, biking, driving, transit), whether they travel with kids or someone with a mobility difference, and whether they'd use the road more if it felt safer. Comments go through a moderation queue before appearing on the public wall. The site also tracks aggregate stats so you can see the community at a glance.</p>
-
-                <h3>The Stack</h3>
-                <p>Next.js with App Router for the frontend, Supabase for the database with row-level security, Resend for email notifications when new comments come in, and Vercel for hosting with auto-deploy from GitHub. I wrote the full spec as a detailed markdown document and handed it to Claude Code, which built the entire site.</p>
-
-                <h3>The Bigger Point</h3>
-                <p>This is a full-stack web application with a database, admin panel, email notifications, and moderation &mdash; the kind of thing that would have cost thousands to commission. It's live, it's being used for real advocacy, and a non-developer built it. If you have a cause in your community, you have the tools to amplify it.</p>
-            </div>
-        </div>
-
-        <div class="card-links">
-            <a href="https://www.saferbraddock.org/" target="_blank">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                Live Site
-            </a>
-        </div>
-    </div>
-
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!-- PROJECT 7: Video Editing Double Demo -->
+    <!-- PROJECT 8: Video Editing Double Demo -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div class="card">
         <div class="card-header">
