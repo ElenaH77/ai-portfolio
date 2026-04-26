@@ -305,6 +305,57 @@
 <div class="projects" id="projects">
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT: What Dispatch Heard in April -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>What Dispatch Heard in April</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">A data piece documenting every pedestrian, cyclist, and scooter strike in Alexandria, Virginia during a 22-day window in April 2026 &mdash; built by transcribing 28,000+ public dispatch recordings with OpenAI Whisper, flagging incidents with custom keyword logic, and human-verifying every result. The published piece embeds dispatch audio for each incident and surfaces a 3x gap between what dispatch heard and what the public saw.</p>
+        <div class="tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">Python</span>
+            <span class="tag">OpenAI Whisper</span>
+            <span class="tag">Data Journalism</span>
+            <span class="tag">Civic Tech</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Problem</h3>
+                <p>On the night of April 22, I happened to be listening to Alexandria police dispatch on OpenMHz when a hit-and-run at the Braddock Metro crosswalk was called in live. APD never put out a public statement about it. That made me wonder: how often does this happen? Alexandria's Vision Zero crash dashboard only includes incidents that meet Virginia's statutory reporting threshold ($1,500+ in damage or confirmed injury), and the data lags by two months. Hit-and-runs where the victim walks away may never generate a record at all. The public was getting an undercount, on a delay, with no way to see what was missing.</p>
+
+                <h3>What I Built</h3>
+                <p>A Python tool that polls OpenMHz's archive of Alexandria police and fire dispatch audio, transcribes every recording with OpenAI's Whisper, runs custom keyword logic to flag potential pedestrian, cyclist, and scooter incidents, and presents the flagged audio for human review. Over April 1&ndash;22, it processed 28,321 recordings, flagged 129, and surfaced 73 incident clusters. After manual verification I had a chronological record of every strike in the window &mdash; with the dispatch audio attached to each one.</p>
+
+                <h3>The Output</h3>
+                <p>A single-page web piece at <a href="https://elenah77.github.io/what-dispatch-heard-in-april/" target="_blank">elenah77.github.io/what-dispatch-heard-in-april</a>. Each incident is a card with date, location, type, transcript excerpt, embedded dispatch audio, and a link out to the full call on OpenMHz. The piece contrasts that record against the handful of incidents that received any public coverage, and asks the city to adopt a Charlottesville-style policy requiring incident reports for all pedestrian/cyclist/scooter strikes regardless of threshold.</p>
+
+                <h3>The Stack</h3>
+                <p>Python for the polling and pipeline, OpenAI Whisper for transcription, SQLite for the local incident database, and Claude Code as my pair programmer for the whole build. The published page is static HTML on GitHub Pages. Total cost: about $20 in Whisper credits plus an existing AI subscription and several evenings of review.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>Public-safety dispatch is open by design &mdash; OpenMHz hosts archives for hundreds of jurisdictions. The transcription and flagging tools are now cheap enough that one person at a kitchen table can systematically audit a category of incidents that would otherwise stay invisible. This is the kind of accountability work that used to require a newsroom. It doesn't anymore.</p>
+            </div>
+        </div>
+
+        <div class="card-links">
+            <a href="https://elenah77.github.io/what-dispatch-heard-in-april/" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Read the Piece
+            </a>
+            <a href="https://github.com/ElenaH77/dispatch-pedestrian-monitor" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                Source
+            </a>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- PROJECT 1: Better Braddock -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div class="card">
@@ -614,6 +665,61 @@ In this folder you will find a blank pdf camp form as well as completed forms fr
             <a href="https://tidekeeper.lovable.app" target="_blank">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 Try It
+            </a>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT: Freezer Inventory + AI Meal Planner -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Freezer Inventory + AI Meal Planner</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">A home automation project from early 2024 that turned my chaotic deep freezer into a queryable database. Tap an NFC tag with my phone, log an add or remove, and an iOS shortcut pipes JSON through a Google Apps Script to a Google Sheet &mdash; which then feeds an AI meal planner. Built with ChatGPT as my coding coach back in 2024, still in daily use today (now powering a Claude-project based meal planner).</p>
+        <div class="tags">
+            <span class="tag">ChatGPT</span>
+            <span class="tag">Google Apps Script</span>
+            <span class="tag">iOS Shortcuts</span>
+            <span class="tag">NFC</span>
+            <span class="tag">Home Automation</span>
+            <span class="tag">Meal Planning</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>Demo (7 min)</h3>
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/UuC1p086bDw" allowfullscreen loading="lazy"></iframe>
+                </div>
+
+                <h3>The Problem</h3>
+                <p>I had a deep freezer in the basement that had been a disaster since the early pandemic, when I&mdash;like everyone&mdash;panic-bought a bunch of frozen food and shoved it in there. I'd be at the grocery store wondering if I already had chicken breasts at home. I wanted to actually cook through what was in there instead of buying duplicates and letting things get freezer-burned.</p>
+
+                <h3>How It Works</h3>
+                <p>Every item in the freezer gets a sharpie-number written on the package that matches a row in a Google Sheet. To add or remove something, I tap an NFC tag stuck to the freezer with my phone (or tap a shortcut icon). An iOS Shortcut asks "adding or removing?" and what number, formats a JSON packet, and sends it to a Google Apps Script web app that updates the sheet. The whole interaction takes about three seconds.</p>
+
+                <p>Then the meal planning layer: I gave ChatGPT (and now Claude) access to the sheet, with a directive to suggest a weeknight meal and a longer weekend meal each week using what's actually in there, accounting for what my family likes to eat. It gives me recipes, grocery lists, and ideas for what to keep stocked.</p>
+
+                <h3>The Stack</h3>
+                <p>Google Sheets as the database, Google Apps Script as the backend, iOS Shortcuts for the phone-side UX, and an NFC tag stuck to the freezer for instant access. The meal planner started as a custom ChatGPT chat with a Google Sheets plugin and has since migrated to Claude paired with the same sheet.</p>
+
+                <h3>What I Learned</h3>
+                <p>This was my first real "the AI is my coding coach" project. ChatGPT walked me through Google Apps Script step by step &mdash; I had no idea how any of it worked when I started. The one thing it couldn't help with was the iOS Shortcut piece (this was early 2024 and the tooling just wasn't there yet for that), so I hired someone on Fiverr for that part. Today I'd build the whole thing in an afternoon with Claude Code.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>This is the project that convinced me AI-assisted building was real. A working home automation system that I still use almost every day, built by someone who couldn't write a line of JavaScript. The bar for "I could make that" got a lot lower in 2024, and it's only kept dropping.</p>
+            </div>
+        </div>
+
+        <div class="card-links">
+            <a href="https://youtu.be/UuC1p086bDw" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Watch Demo
             </a>
         </div>
     </div>
