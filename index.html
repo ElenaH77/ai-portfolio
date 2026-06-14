@@ -356,6 +356,59 @@
     </div>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- PROJECT: Dispatch Scanner — Always-On Edition -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Dispatch Scanner &mdash; Always-On Edition</h2>
+            <span class="badge active">active</span>
+        </div>
+        <p class="card-desc">The infrastructure follow-up to What Dispatch Heard in April. A cloud server now ingests, transcribes, and flags Alexandria dispatch calls 24/7 on its own, and a private Slack bot helps me answer the questions people text me &mdash; like "what was the police commotion last night around the corner" &mdash; from my phone in about five seconds. The April piece showed that one person can do investigative civic tech with AI; this one shows that same person can also run it like a real service.</p>
+        <div class="tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">DigitalOcean</span>
+            <span class="tag">WireGuard</span>
+            <span class="tag">Slack Bolt SDK</span>
+            <span class="tag">systemd</span>
+            <span class="tag">SQLite</span>
+        </div>
+
+        <div class="card-detail">
+            <button class="detail-toggle" onclick="toggleDetail(this)">
+                <span class="arrow">&#9654;</span> How I Built This &amp; How You Can Too
+            </button>
+            <div class="detail-content">
+                <h3>The Problem</h3>
+                <p>The April piece worked, but operating it was painful. Every few days I had to open a terminal on my laptop, run the ingest script, wait an hour or two for transcription to run, then run the review tool. If someone texted me asking what was happening at an intersection, the data was stale or missing entirely &mdash; and I had no way to query it from my phone. The advocacy-side use case I really wanted (real-time situational awareness while I'm out walking the neighborhood) was structurally blocked by the laptop-bound batch shape of the whole thing.</p>
+
+                <h3>What I Built</h3>
+                <p>Three things, on top of the original codebase:</p>
+                <ul>
+                    <li><strong>An always-on tail.</strong> A $6/month DigitalOcean droplet running a Python loop that polls OpenMHz every 90 seconds, transcribes new calls with Whisper, and flags incidents &mdash; the same pipeline as April, just running continuously instead of in batches. systemd manages the service so it restarts itself on failure; a watchdog pings my phone via Pushover if the database ever stops getting fresh data.</li>
+                    <li><strong>A WireGuard VPN bridge through my home.</strong> Cloudflare blocks OpenMHz requests from datacenter IPs (which DigitalOcean, AWS, and every major cloud provider qualify as). The workaround: I set up WireGuard on my home UniFi router and routed the droplet's outbound traffic through it. OpenMHz sees my residential IP, lets the request through, and the rest just works. Temporary until OpenMHz adds my server IP to their allowlist.</li>
+                    <li><strong>A private Slack bot.</strong> "Alexandria Dispatch" lives in my work Slack and only responds to me. When I DM it a question, it parses the question with Claude (location? time window? category?), pulls candidate calls from the database, hands the candidates back to Claude to identify the relevant ones and write a summary, and replies with the answer plus a direct link to the OpenMHz audio. No webhooks or public ports &mdash; it talks to Slack over a WebSocket using Slack's Socket Mode.</li>
+                </ul>
+
+                <h3>The Output</h3>
+                <p>A small data-processing platform that runs without me. Any time of day, from any device with Slack, I can type "anything on Mount Vernon Ave today?" or "what was that on Commonwealth last night around 10?" and get a coherent factual answer in about five seconds. First real query &mdash; about a Saturday-night cluster I'd only seen flashing lights for &mdash; returned a complete summary of a 30-call cluster of disorderly conduct dispatches with vehicle descriptions and a link to the audio. The original published-piece pipeline (the verdicts review, the May site, the cumulative map) still runs unchanged on my laptop; the cloud just keeps it fed.</p>
+
+                <h3>The Stack</h3>
+                <p>DigitalOcean droplet (Ubuntu 24.04, $6/mo). Python 3.12 with slack-bolt for the bot, curl_cffi for OpenMHz, anthropic and openai SDKs for the language and transcription models. SQLite in WAL mode so the always-on writer and the bot reader don't collide. systemd for service management, drop-in overrides, and timer-based watchdog + nightly backups. WireGuard for the home-VPN bridge. Pushover for phone alerts. The whole thing was built and debugged with Claude Code as my pair programmer; I went from "what's a droplet" to "the bot just replied to me from my pocket" in one long evening.</p>
+
+                <h3>The Bigger Point</h3>
+                <p>The April piece argued that AI tools have made investigative civic work tractable for individuals. This one argues that the operations layer has too. Five years ago, "put my Python script on a cloud server with monitoring and a chat interface" was a multi-week professional project. With Claude Code in the loop walking me through every concept I hadn't seen before &mdash; reserved IPs, systemd units, WireGuard split tunneling, Slack Socket Mode, WAL-mode database snapshots &mdash; it's an afternoon. The infrastructure isn't the bottleneck anymore; the bottleneck is figuring out what's worth running.</p>
+            </div>
+        </div>
+
+        <div class="card-links">
+            <a href="https://github.com/ElenaH77/dispatch-pedestrian-monitor" target="_blank">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                Source
+            </a>
+        </div>
+    </div>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- PROJECT 1: Better Braddock -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <div class="card">
